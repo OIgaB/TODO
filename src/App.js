@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import axios from 'axios';
 
-function App() {
+function App() {      
+  const [tasks, setTasks] = useState([]);
+
+  const BASE_URL = 'https://todo-backend-iota.vercel.app/api/tasks/';
+  
+  const getAlltasks = async () => {
+    try {
+      const { data } = await axios.get(BASE_URL);
+      console.log('data:', data);
+      setTasks(data);
+      return data;
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App"> 
+      <button onClick={getAlltasks}>get all tasks</button>
+      <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        {tasks.length > 0 &&
+        tasks.map(({ title, description, priority, completed, _id }) => (
+          <li key={_id}>
+            <div style={{ border: '1px dashed blue', padding: '10px', width: '500px', backgroundColor: 'yellowgreen' }}>
+              <h4>{title}</h4>
+              <p>{description}</p>
+              <p>priority: {priority}</p>
+              <p>completed: {completed ? 'true' : 'false'}</p>
+            </div>
+          </li>          
+        ))}
+      </ul>
     </div>
   );
 }
