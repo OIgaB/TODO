@@ -1,8 +1,23 @@
+import { useState } from 'react';
 import { api } from '../../services/tasks-api';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import sprite from '../../images/sprite.svg';
 
 
-export const TaskForm = ({ modalTitle, modalBtnTitle, onClose, tasks }) => {
+export const TaskForm = ({ 
+    modalTitle, 
+    modalBtnTitle, 
+    onClose, 
+    tasks, 
+    currentTitle, 
+    currentDescription, 
+    currentPriority, 
+    currentCompleted, 
+    current_id
+}) => {
+    const [titleValue, setTitleValue] = useState(currentTitle); // to edit
+    const [descriptionValue, setDescriptionValue] = useState(currentDescription); // to edit
+    const [selectedPriority, setSelectedPriority] = useState(currentPriority ? currentPriority : 10);  
 
     const checkTitleClone = (inputTitle, inputDescription, inputPriority) => {  
         const titleClone = tasks.find((task) => ( 
@@ -52,8 +67,8 @@ export const TaskForm = ({ modalTitle, modalBtnTitle, onClose, tasks }) => {
                         placeholder="Title"
                         autoFocus
                         required
-                        // defaultValue={titleValue} // для редагування
-                        // onChange={e => setTitleValue(e.target.value)} // для редагування
+                        defaultValue={titleValue} // to edit
+                        onChange={e => setTitleValue(e.target.value)} // to edit
                     />
                 </label>
                 <label>
@@ -61,8 +76,8 @@ export const TaskForm = ({ modalTitle, modalBtnTitle, onClose, tasks }) => {
                         type="text"
                         name="description"
                         placeholder="Description"
-                        // defaultValue={descriptionValue} // для редагування
-                        // onChange={e => setDescriptionValue(e.target.value)} // для редагування
+                        defaultValue={descriptionValue} // to edit
+                        onChange={e => setDescriptionValue(e.target.value)} // to edit
                     />
                 </label>
                 <div>
@@ -74,7 +89,8 @@ export const TaskForm = ({ modalTitle, modalBtnTitle, onClose, tasks }) => {
                         min="1" 
                         max="10" 
                         list="values" 
-                        defaultValue={10}
+                        defaultValue={selectedPriority}  // to edit
+                        onChange={e => setSelectedPriority(e.target.value)}  // to edit
                         className='input-range' 
                     />
                     <datalist id="values">
@@ -90,23 +106,15 @@ export const TaskForm = ({ modalTitle, modalBtnTitle, onClose, tasks }) => {
                         <option value="10" label="10 - low"></option>
                     </datalist>
                 </div>
-                {/* <label>
-                    <input
-                        type="range"
-                        name="priority"
-                        min="0" 
-                        max="10"
-                        // placeholder="Priority"
-                        // defaultValue={titleValue} // для редагування
-                        // onChange={e => setTitleValue(e.target.value)} // для редагування
-                    />
-                </label> */}
-                <button type="submit">
-                <div>
-                    {/* <svg>
-                        <use href={SvgSprite + '#icon-plus'} />
-                    </svg> */}
-                </div>
+
+                <button type="submit" aria-label={`${modalBtnTitle} task`}>
+                    <svg width="16" height="16" className='formBtnIcon'>
+                        {modalBtnTitle === 'Create' ? 
+                            <use href={sprite + '#icon-plus'} />  
+                        :
+                            <use href={sprite + '#icon-pencil'} />                                    
+                        }
+                    </svg> 
                     {modalBtnTitle}
                 </button>
             </form>
