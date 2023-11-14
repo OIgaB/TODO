@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import { Modal } from '../Modal/Modal';
 import { TaskForm } from '../TaskForm/TaskForm';
+import { api } from '../../services/tasks-api';
 import sprite from '../../images/sprite.svg';
 
 
 export const Card = ({ title, description, priority, completed, _id, tasks }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleDeleteTask = () => {
-        console.log('To delete');   
-    };
 
     return (
         <div style={{ border: '1px dashed blue', padding: '10px', width: '500px', backgroundColor: 'yellowgreen' }}>
@@ -17,8 +15,6 @@ export const Card = ({ title, description, priority, completed, _id, tasks }) =>
             <p>{description}</p>
             <p>priority: {priority}</p>
             <p>completed: {completed ? 'true' : 'false'}</p>
-
-
             <div className='CardIconsWrapper'>
                 <button
                     type="button"
@@ -49,7 +45,7 @@ export const Card = ({ title, description, priority, completed, _id, tasks }) =>
                     type="button"
                     className='cardBtnIcon'
                     aria-label="delete task"
-                    onClick={handleDeleteTask}
+                    onClick={() => api.deleteTask(_id, title)}
                 >
                     <svg width="16" height="16">
                         <use href={sprite + '#icon-trash'} />

@@ -57,10 +57,11 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
     }
   };
 
-  const deleteTask = async (id) => {
+  const deleteTask = async (id, title) => {
     try {
       const { data } = await instance.delete(`/tasks/${id}`);
       console.log('data:', data);
+      Notify.success(`Your task "${title}" was deleted.`); 
       return data;
     } catch(error) {
         console.error('error.message:', error.message);
