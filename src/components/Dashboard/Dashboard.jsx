@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { Card } from '../Card/Card';
 import { Modal } from '../Modal/Modal';
 import { TaskForm } from '../TaskForm/TaskForm';
+
 
 export const Dashboard = ({ tasks }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,19 +14,26 @@ export const Dashboard = ({ tasks }) => {
                 {tasks?.length > 0 &&
                     tasks.map(({ title, description, priority, completed, _id }) => (
                         <li key={_id}>
-                            <div style={{ border: '1px dashed blue', padding: '10px', width: '500px', backgroundColor: 'yellowgreen' }}>
-                            <h4>{title}</h4>
-                            <p>{description}</p>
-                            <p>priority: {priority}</p>
-                            <p>completed: {completed ? 'true' : 'false'}</p>
-                            </div>
+                            <Card 
+                                title={title} 
+                                description={description} 
+                                priority={priority} 
+                                completed={completed} 
+                                _id={_id} 
+                                tasks={tasks} 
+                            />
                         </li>          
                     ))
                 }
             </ul>
             {isModalOpen && (
                 <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-                    <TaskForm />               
+                    <TaskForm 
+                        modalTitle={'Add task'}
+                        modalBtnTitle={'Create'}
+                        onClose={() => setIsModalOpen(false)} 
+                        tasks={tasks}
+                    />               
                 </Modal>
             )}
         </div>

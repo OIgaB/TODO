@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
   const instance = axios.create({
     baseURL: 'https://todo-backend-iota.vercel.app/api/',
@@ -25,9 +26,11 @@ import axios from 'axios';
   };
 
   const addTask = async (body) => {
+    console.log('body in services', body);
     try {
       const { data } = await instance.post('/tasks/', body);
       console.log('data:', data);
+      Notify.success('Your task was created.'); 
       return data;
     } catch(error) {
         console.error('error.message:', error.message);

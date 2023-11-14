@@ -87,3 +87,36 @@ code {
   border-radius: 8px;
   background: white;
 }
+
+.input-range {
+  width: 220px;
+  margin: 0;
+}
+
+datalist {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  writing-mode: vertical-lr;
+  width: 220px;
+}
+
+option {
+  padding: 0;
+}
+
+/* Tasks icons */
+.cardBtnIcon {
+  width: 16px;
+  height: 16px;
+  background-color: transparent;
+  border: none;
+  stroke: rgba(22, 22, 22, 0.5); 
+  fill: transparent;  
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    &:hover,
+    &:focus {
+      stroke: rgba(190, 219, 176, 1);
+      transform: scale(1.1);
+    }
+}
