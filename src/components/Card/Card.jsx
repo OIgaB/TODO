@@ -7,6 +7,7 @@ import sprite from '../../images/sprite.svg';
 
 export const Card = ({ title, description, priority, completed, _id, tasks }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [status, setStatus] = useState(completed); 
 
 
     return (
@@ -51,6 +52,23 @@ export const Card = ({ title, description, priority, completed, _id, tasks }) =>
                         <use href={sprite + '#icon-trash'} />
                     </svg>
                 </button>
+                    <label className="label-checkbox">
+                        Completed:
+                        <input 
+                            type="checkbox" 
+                            name="completed" 
+                            value={status} 
+                            checked={status} 
+                            onChange={() => {
+                                setStatus(!status)
+                                api.editTaskStatus(_id, { completed: status })                                
+                            }}
+                            className="checkbox" 
+                        />
+                        <svg aria-label="mark" className="checkbox-icon" width="16px" height="15px">
+                            <use href={sprite + '#icon-checkbox'}></use>
+                        </svg>
+                    </label>
             </div>
         </div>
     );

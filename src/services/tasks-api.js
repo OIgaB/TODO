@@ -48,10 +48,11 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
     }
   };
 
-  const editTaskStatus = async (id, body) => {
+  const editTaskStatus = async (id, completed) => {
     try {
-      const { data } = await instance.put(`/tasks/${id}`, body);
-      console.log('data:', data);
+      console.log('before:', id, completed);
+      const { data } = await instance.put(`/tasks/${id}`, completed);
+      console.log('data in editTaskStatus:', data);
       return data;
     } catch(error) {
         console.error('error.message:', error.message);

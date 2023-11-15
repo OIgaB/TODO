@@ -120,7 +120,7 @@ export const TaskForm = ({
                     </datalist>
                 </div>
                 {currentCompleted !== undefined && (  // to edit
-                    <label className="label-terms">
+                    <label className="label-checkbox">
                         Completed:
                         <input 
                             type="checkbox" 
