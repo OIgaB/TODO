@@ -29,7 +29,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
     console.log('body in services', body);
     try {
       const { data } = await instance.post('/tasks/', body);
-      console.log('data:', data);
+      console.log('data - in add:', data);
       Notify.success('Your task was created.'); 
       return data;
     } catch(error) {
@@ -40,7 +40,8 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
   const editTask = async (id, body) => {
     try {
       const { data } = await instance.put(`/tasks/${id}`, body);
-      console.log('data:', data);
+      console.log('data - in edit:', data);
+      Notify.success('The task was edited.'); 
       return data;
     } catch(error) {
         console.error('error.message:', error.message);

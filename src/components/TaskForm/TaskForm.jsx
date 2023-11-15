@@ -13,11 +13,12 @@ export const TaskForm = ({
     currentDescription, 
     currentPriority, 
     currentCompleted, 
-    current_id
+    currentId
 }) => {
     const [titleValue, setTitleValue] = useState(currentTitle); // to edit
     const [descriptionValue, setDescriptionValue] = useState(currentDescription); // to edit
-    const [selectedPriority, setSelectedPriority] = useState(currentPriority ? currentPriority : 10);  
+    const [selectedPriority, setSelectedPriority] = useState(currentPriority ? currentPriority : 10);
+    const [completed, setCompleted] = useState(currentCompleted);  // to edit
 
     const checkTitleClone = (inputTitle, inputDescription, inputPriority) => {  
         const titleClone = tasks.find((task) => ( 
@@ -45,9 +46,21 @@ export const TaskForm = ({
         const inputTitle = event.target.elements.title.value.trim();
         const inputDescription = event.target.elements.description.value.trim();
         const inputPriority = event.target.elements.priority.value;
-      
-        checkTitleClone(inputTitle, inputDescription, inputPriority); 
-    
+
+        if(currentId) { // to edit        
+            const inputCompleted = event.target.elements.completed.value;
+            const editedTask = {
+                title: inputTitle,
+                description: inputDescription === '' ? ' ' : inputDescription,
+                priority: Number(inputPriority),
+                completed: inputCompleted,
+            };
+            console.log('editedTask', editedTask);
+            api.editTask(currentId, editedTask);
+        } else { // to add
+            checkTitleClone(inputTitle, inputDescription, inputPriority); 
+        }
+        
         event.target.reset();
     
         if (event.currentTarget === event.target) {
@@ -106,7 +119,22 @@ export const TaskForm = ({
                         <option value="10" label="10 - low"></option>
                     </datalist>
                 </div>
-
+                {currentCompleted !== undefined && (  // to edit
+                    <label className="label-terms">
+                        Completed:
+                        <input 
+                            type="checkbox" 
+                            name="completed" 
+                            value={completed} 
+                            checked={completed} 
+                            onChange={() => setCompleted(!completed)}
+                            className="checkbox" 
+                        />
+                        <svg aria-label="mark" className="checkbox-icon" width="16px" height="15px">
+                            <use href={sprite + '#icon-checkbox'}></use>
+                        </svg>
+                    </label>
+                )} 
                 <button type="submit" aria-label={`${modalBtnTitle} task`}>
                     <svg width="16" height="16" className='formBtnIcon'>
                         {modalBtnTitle === 'Create' ? 

@@ -33,11 +33,11 @@ export const Card = ({ title, description, priority, completed, _id, tasks }) =>
                             modalBtnTitle={'Edit'}
                             onClose={() => setIsModalOpen(false)} 
                             tasks={tasks}
-                            title={title}
-                            description={description}
-                            priority={priority}
-                            completed={completed}
-                            _id={_id}
+                            currentTitle={title}
+                            currentDescription={description}
+                            currentPriority={priority}
+                            currentCompleted={completed}
+                            currentId={_id}
                         /> 
                     </Modal>
                 )}
