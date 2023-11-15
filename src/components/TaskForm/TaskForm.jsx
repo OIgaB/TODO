@@ -72,7 +72,7 @@ export const TaskForm = ({
     return (
         <div className='formContainer'> 
             <h4>{modalTitle}</h4>
-            <form onSubmit={handleFormSubmit} autoComplete="off">
+            <form name='add-task-form' onSubmit={handleFormSubmit} autoComplete="off">
                 <label>
                     <input
                         type="text"

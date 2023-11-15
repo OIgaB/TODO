@@ -1,7 +1,6 @@
 export const FilterByTitle = ({ getTitle }) => {
     const handleChange = ({ target: {value}}) => {
         getTitle(value.trim());
-        // console.log('getTitle', getTitle);
     };
 
     return (
