@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { FilterByTitle } from '../FilterByTitle/FilterByTitle';
 import { FilterByStatus } from '../FilterByStatus/FilterByStatus';
+import { FilterByPriority } from '../FilterByPriority/FilterByPriority';
 import { Card } from '../Card/Card';
 import { Modal } from '../Modal/Modal';
 import { TaskForm } from '../TaskForm/TaskForm';
@@ -8,33 +9,37 @@ import { TaskForm } from '../TaskForm/TaskForm';
 
 export const Dashboard = ({ tasks }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [titleInFilter, setTitleInFilter] = useState('');
-    const [statusInFilter, setStatusInFilter] = useState('');
+    const [filteredByTitle, setFilteredByTitle] = useState('');
+    const [filteredByStatus, setFilteredByStatus] = useState('');
+    const [reorderedByPriority, setReorderedByPriority] = useState('');
 
     const getFilteredByTitle = useMemo(() => { 
-        return tasks.filter(({ title }) => title.toLowerCase().includes(titleInFilter.toLowerCase())); 
-    }, [tasks, titleInFilter]);
+        return tasks.filter(({ title }) => title.toLowerCase().includes(filteredByTitle.toLowerCase())); 
+    }, [tasks, filteredByTitle]);
 
     const getFilteredByStatus = useMemo(() => { 
-        if(statusInFilter !== 'all' && statusInFilter !== '') {
-            return tasks.filter(({ completed }) => completed === JSON.parse(statusInFilter)); 
-        } else if(statusInFilter === 'all') {
+        if(filteredByStatus !== 'all' && filteredByStatus !== '') {
+            return tasks.filter(({ completed }) => completed === JSON.parse(filteredByStatus)); 
+        } else if(filteredByStatus === 'all') {
             return tasks;
         }
         return;
-    }, [tasks, statusInFilter]);   
+    }, [tasks, filteredByStatus]);   
 
-    const filteredTasks = getFilteredByStatus ? getFilteredByStatus : getFilteredByTitle;
-    console.log('filteredTasks', filteredTasks);
-    
+    // const filteredTasks = getFilteredByStatus ? getFilteredByStatus : getFilteredByTitle;
+    // console.log('filteredTasks', filteredTasks);
+
+    // console.log('reorderedByPriority', reorderedByPriority);
+
     return (
         <div>
             <button onClick={() => setIsModalOpen(true)}>Add task</button>
-            <FilterByTitle getTitle={setTitleInFilter} />
-            <FilterByStatus getStatus={setStatusInFilter} />
+            <FilterByTitle getTitle={setFilteredByTitle} />
+            <FilterByStatus getStatus={setFilteredByStatus} />
+            <FilterByPriority tasks={tasks} getPriority={setReorderedByPriority} />
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {filteredTasks?.length > 0 &&
-                    filteredTasks.map(({ title, description, priority, completed, _id }) => (
+                {tasks?.length > 0 &&
+                    tasks.map(({ title, description, priority, completed, _id }) => (
                         <li key={_id}>
                             <Card 
                                 title={title} 
