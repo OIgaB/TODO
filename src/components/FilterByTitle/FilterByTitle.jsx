@@ -6,7 +6,7 @@ export const FilterByTitle = ({ getTitle }) => {
     return (
         <div>
             <label>
-                Find a task by its title
+                Find the task by its title
                 <input
                     type="name"
                     name="filter"

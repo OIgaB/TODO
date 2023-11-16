@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { FilterByTitle } from '../FilterByTitle/FilterByTitle';
 import { FilterByStatus } from '../FilterByStatus/FilterByStatus';
 import { FilterByPriority } from '../FilterByPriority/FilterByPriority';
@@ -8,10 +8,19 @@ import { TaskForm } from '../TaskForm/TaskForm';
 
 
 export const Dashboard = ({ tasks }) => {
+    const [completedTasks, setCompletedTasks] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [filteredByTitle, setFilteredByTitle] = useState('');
     const [filteredByStatus, setFilteredByStatus] = useState('');
     const [reorderedByPriority, setReorderedByPriority] = useState('');
+
+
+    useEffect(() => {
+        const completedTasks = tasks.filter(({ completed }) => completed === true); 
+        const completedTasksPercentage = (completedTasks.length * 100) / tasks.length;
+        setCompletedTasks(completedTasksPercentage);
+    }, [tasks, completedTasks])
+
 
     const getFilteredByTitle = useMemo(() => { 
         return tasks.filter(({ title }) => title.toLowerCase().includes(filteredByTitle.toLowerCase())); 
@@ -26,6 +35,8 @@ export const Dashboard = ({ tasks }) => {
         return;
     }, [tasks, filteredByStatus]);   
 
+    console.log('completedTasks', completedTasks);
+
     // const filteredTasks = getFilteredByStatus ? getFilteredByStatus : getFilteredByTitle;
     // console.log('filteredTasks', filteredTasks);
 
@@ -37,6 +48,10 @@ export const Dashboard = ({ tasks }) => {
             <FilterByTitle getTitle={setFilteredByTitle} />
             <FilterByStatus getStatus={setFilteredByStatus} />
             <FilterByPriority tasks={tasks} getPriority={setReorderedByPriority} />
+            <p>Number of tasks: {tasks.length}</p>
+            {completedTasks !== undefined && !isNaN(completedTasks) && (
+                <p>Completed: {completedTasks}%</p>
+            )}
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {tasks?.length > 0 &&
                     tasks.map(({ title, description, priority, completed, _id }) => (
