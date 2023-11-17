@@ -69,13 +69,14 @@ export const TaskForm = ({
 
     return (
         <div className='formContainer'> 
-            <h4>{modalTitle}</h4>
+            <h4 className='form-title'>{modalTitle}</h4>
             <form name='add-task-form' onSubmit={handleFormSubmit} autoComplete="off">
                 <label>
                     <input
                         type="text"
                         name="title"
                         placeholder="Title"
+                        className='form-search-input'
                         autoFocus
                         required
                         defaultValue={titleValue} // to edit
@@ -87,12 +88,13 @@ export const TaskForm = ({
                         type="text"
                         name="description"
                         placeholder="Description"
+                        className='form-search-input form-search-input__desc'
                         defaultValue={descriptionValue} // to edit
                         onChange={e => setDescriptionValue(e.target.value)} // to edit
                     />
                 </label>
                 <div>
-                    <label htmlFor="priority">Priority</label><br />
+                    <label htmlFor="priority" className='form-priority-label'>Priority</label><br />
                     <input 
                         type="range" 
                         id="priority" 
@@ -133,14 +135,16 @@ export const TaskForm = ({
                         </svg>
                     </label>
                 )} 
-                <button type="submit" aria-label={`${modalBtnTitle} task`}>
-                    <svg width="16" height="16" className='formBtnIcon'>
-                        {modalBtnTitle === 'Create' ? 
-                            <use href={sprite + '#icon-plus'} />  
-                        :
-                            <use href={sprite + '#icon-pencil'} />                                    
-                        }
-                    </svg> 
+                <button type="submit" aria-label={`${modalBtnTitle} task`} className="form-submitBtn">
+                    <div className="form-iconWrapper">
+                        <svg width="16" height="16" className='formBtnIcon'>
+                            {modalBtnTitle === 'Create' ? 
+                                <use href={sprite + '#icon-plus'} />  
+                            :
+                                <use href={sprite + '#icon-pencil'} />                                    
+                            }
+                        </svg>                         
+                    </div>
                     {modalBtnTitle}
                 </button>
             </form>

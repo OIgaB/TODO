@@ -10,8 +10,8 @@ export const Card = ({ title, description, priority, completed, _id, tasks, getT
     const [isOverflowVisible, setOverflowVisible] = useState(false); // overflow in description
 
     return (
-        <div className="cardContainer">
-            <h4 className='cardTitle'>{title}</h4>
+        <div className={status ? "cardContainer cardContainer__completed" : "cardContainer cardContainer__incompleted"}>
+            <h4 className={status ? "cardTitle cardTitle__completed" : "cardTitle"}>{title}</h4>
             <p 
                 className={isOverflowVisible ? "cardDescriptionFull cardDescription" : "cardDescriptionShort cardDescription"} 
                 onClick={() => setOverflowVisible(!isOverflowVisible)}

@@ -112,14 +112,14 @@ button {
   cursor: pointer;
   transition: background-color 250ms ease-in;
   border-radius: 50%;
-  background-color: transparent;
+  background-color: rgba(9, 64, 71, 0.76);
   z-index: 1000;
     &:hover,
      :focus {
-      background-color: rgba(218, 165, 32, 0.425);      
+      background-color: rgba(20, 101, 112, 0.76);     
     }
     &:active {
-      background-color: goldenrod;
+      background-color: rgba(39, 146, 160, 0.76);
     }
 }
 
@@ -276,12 +276,49 @@ button {
 
 .formContainer {
   width: 350px;
-  height: 522px;
+  min-height: 350px;
   padding: 24px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 8px;
-  background: white;
+  background: rgb(23, 23, 34);
+  border: 3px solid rgb(27, 77, 70);
+  color:#bbb;
+}
+
+.form-title {
+  font-family: Poppins-SemiBold, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: normal;
+  font-style: normal;
+}
+
+.form-search-input {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  color: #bbb;
+  background: #111214;
+  border-radius: 14px;
+  padding: 10px 16px 10px 16px;
+  border: 2px solid rgb(11, 42, 54);
+  box-sizing: border-box;
+  outline: transparent;
+}
+
+.form-search-input__desc {
+  height: 75px;
+  resize: none;
+}
+
+.form-priority-label {
+  font-family: Poppins-Medium, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: normal;
+  font-style: normal;
 }
 
 .input-range {
@@ -295,10 +332,48 @@ datalist {
   justify-content: space-between;
   writing-mode: vertical-lr;
   width: 220px;
+  font-family: Poppins-Regular, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: normal;
+  font-style: normal;
 }
 
 option {
   padding: 0;
+}
+
+.form-submitBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  width: 100%;
+  height: 49px;
+  border-radius: 8px;
+  background-color: rgb(2, 54, 66); 
+  border-color: transparent;
+  color: wheat; 
+  font-family: Poppins-Medium, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: normal;
+  font-style: normal;
+  &:hover,
+  &:focus {
+    background-color: rgb(6, 47, 58);;  
+  }
+}
+
+.form-iconWrapper{
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 8px;
+  background-color: rgb(11, 49, 107); 
+  border-radius: 6px;
 }
 
 .formBtnIcon {
@@ -313,14 +388,20 @@ option {
 
 .cardContainer {
   width: 334px;
-  /* height: 154px; */
-  background: linear-gradient(45deg, rgb(18, 40, 22), rgb(19, 23, 58));
   border: 3px solid rgb(66, 66, 82);
   padding: 14px 24px;
   border-radius: 8px;
   color: #ccc;
   margin-left: auto;
   margin-right: auto;
+}
+
+.cardContainer__incompleted {
+  background: linear-gradient(45deg, rgb(18, 40, 22), rgb(19, 23, 58));
+}
+
+.cardContainer__completed {
+  background: linear-gradient(45deg, rgb(36, 44, 37), rgb(58, 60, 75));
 }
 
 .cardTitle {
@@ -331,6 +412,10 @@ option {
   letter-spacing: -0.28px;
   margin-bottom: 8px;
   font-style: normal;
+}
+
+.cardTitle__completed {
+  text-decoration: line-through;
 }
 
 .cardDescription {
