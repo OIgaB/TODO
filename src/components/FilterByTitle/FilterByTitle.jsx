@@ -5,16 +5,14 @@ export const FilterByTitle = ({ getTitle }) => {
 
     return (
         <div>
-            <label>
-                Find the task by its title
-                <input
-                    type="name"
-                    name="filter"
-                    placeholder="Plant onions"
-                    onChange={handleChange}
-                    required
-                />
-            </label>
+            <input
+                type="name"
+                name="filter"
+                placeholder="Search task..."
+                onChange={handleChange}
+                className="menu-search-input"
+                required
+            />
         </div>
     );
 };

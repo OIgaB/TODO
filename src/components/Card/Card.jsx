@@ -19,8 +19,7 @@ export const Card = ({ title, description, priority, completed, _id, tasks, getT
                 {description}
             </p>
             <div className="cardSeparator"></div>
-            <p className="cardPriority">priority: <span className="cardPriorityNumber">{priority}</span></p>
-            {/* <p>completed: {completed ? 'true' : 'false'}</p> */}
+            <p className="cardPriority">priority: <span className="cardPriorityNumber cardPriorityNumber__green">{priority}</span></p>
             <div className='cardIconsWrapper'>
                 <div className='cardIconsWrapper-small'>
                     <button
@@ -63,20 +62,19 @@ export const Card = ({ title, description, priority, completed, _id, tasks, getT
                 </div>
                 <div>
                     <label className="cardCheckboxLabel">
-                            {/* Completed: */}
-                            <input 
-                                type="checkbox" 
-                                name="completed" 
-                                checked={status} 
-                                onChange={() => {
-                                    setStatus(!status)
-                                    getTaskToUpdate(_id, { completed: !status })                              
-                                }}
-                                className="checkbox" 
-                            />
-                            <svg aria-label="mark" className="checkbox-icon" width="16px" height="15px">
-                                <use href={sprite + '#icon-checkbox'}></use>
-                            </svg>
+                        <input 
+                            type="checkbox" 
+                            name="completed" 
+                            checked={status} 
+                            onChange={() => {
+                                setStatus(!status)
+                                getTaskToUpdate(_id, { completed: !status })                              
+                            }}
+                            className="checkbox" 
+                        />
+                        <svg aria-label="mark" className="checkbox-icon" width="16px" height="15px">
+                            <use href={sprite + '#icon-checkbox'}></use>
+                        </svg>
                     </label>
                 </div>
             </div>

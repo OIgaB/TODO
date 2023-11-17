@@ -67,7 +67,7 @@ button {
   margin: 0;
 }
 
-/* Modal */
+/*---------------- Modal -----------------*/
 
 .overlay {
   position: fixed;
@@ -131,7 +131,127 @@ button {
   stroke: black;
 }
 
-/* Form */
+/* ---------------- Filters --------------- */
+
+.top-cover {
+  background: rgb(20, 20, 20);
+  box-shadow: 0px 0px 20px 20px rgb(20, 20, 20);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
+  z-index: 2;
+}
+
+.top-container {
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+.top-menu {
+  border-radius: 22px;
+  margin: 12px 250px;
+  padding: 20px;
+  min-width: 260px;
+  background: #22272c;
+  box-shadow: 0px 0px 6px 4px #0f0f0f;
+}
+
+.top-general-data {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.app-title {
+  font-family: Poppins-SemiBold, sans-serif;
+  font-weight: 600;
+  line-height: normal;
+  font-style: normal;
+  font-size: 30px;
+  background: linear-gradient(to right, #5b6, #56f);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.app-statistics {
+  padding-top: 13px;
+}
+
+.cardPriorityNumber__blue {
+  color: rgb(154, 164, 250);
+}
+
+.top-filters {
+  display: flex;
+  /* background-color: #5b6; */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priorityFilters-container {
+  display: flex;
+  gap: 10px;
+  padding-right: 7px;
+}
+
+.filter-radio-container {
+  display: flex;
+  gap: 5px;
+}
+
+.filter-radio-block {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.filter-radio {
+  font-family: Poppins-Regular, sans-serif;
+  color: rgba(255, 255, 255, 0.774);
+  font-size: 12px;
+  line-height: 16px; 
+}
+
+.cardBtnIcon__blue {
+  margin-left: 3px;
+  background-color: transparent;
+  border: none;
+  stroke: rgba(216, 194, 194, 0.5); 
+  fill: transparent;  
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    &:hover,
+    &:focus {
+      stroke: rgb(80, 112, 199);
+      transform: scale(1.1);
+    }
+}
+
+.menu-search-input {
+  width: 100%;
+  height: 100%;
+  margin-top: 10px;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  color: #bbb;
+  background: #111214;
+  border-radius: 14px;
+  padding: 10px 16px 10px 16px;
+  border: none;
+  box-sizing: border-box;
+  outline: transparent;
+}
+
+.add-btn{
+  position: absolute;
+  right: 230px;
+  color:rgb(174, 179, 228);
+}
+
+/* ----------- Form ------------ */
 
 .formContainer {
   width: 350px;
@@ -233,9 +353,12 @@ option {
 .cardPriorityNumber {
   margin-left: 3px;
   font-family: Poppins-Regular, sans-serif;
-  color: rgb(26, 236, 6);
   font-size: 16px;
   line-height: 16px; 
+}
+
+.cardPriorityNumber__green {
+  color: rgb(26, 236, 6);
 }
 
 .cardIconsWrapper {

@@ -14,14 +14,14 @@ export const FilterByPriority = ({ tasks, getPriority }) => {
     };
 
     return (
-        <div>
+        <div className='priorityFilters-container'>
             <button
                 type="button"
                 className='cardBtnIcon'
                 aria-label="filter by ascending" // up
                 onClick={handleAscendingFilter}
             >
-                <svg width="16" height="16" className='formBtnIcon'>
+                <svg width="26" height="26" className='formBtnIcon'>
                     <use href={sprite + '#icon-ascending'} />
                 </svg>
             </button>
@@ -31,7 +31,7 @@ export const FilterByPriority = ({ tasks, getPriority }) => {
                 aria-label="filter by descending" // down
                 onClick={handleDescendingFilter}
             >
-                <svg width="16" height="16" className='formBtnIcon'>
+                <svg width="26" height="26" className='formBtnIcon'>
                     <use href={sprite + '#icon-descending'} />
                 </svg>
             </button>

@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FilterByTitle } from './components/FilterByTitle/FilterByTitle';
 import { FilterByStatus } from './components/FilterByStatus/FilterByStatus';
 import { FilterByPriority } from './components/FilterByPriority/FilterByPriority';
@@ -6,6 +6,7 @@ import { Card } from './components/Card/Card';
 import { Modal } from './components/Modal/Modal';
 import { TaskForm } from './components/TaskForm/TaskForm';
 import { api } from './services/tasks-api';
+import sprite from '../src/images/sprite.svg';
 
 
 function App() { 
@@ -91,15 +92,39 @@ function App() {
     }, [tasks, filteredByStatus]);   
 
     return (
-        <div>
-            <button onClick={() => setIsModalOpen(true)}>Add task</button>
-            <FilterByTitle getTitle={setFilteredByTitle} />
-            <FilterByStatus getStatus={setFilteredByStatus} />
-            <FilterByPriority tasks={tasks} getPriority={setFilter} />
-            <p>Number of tasks: {tasks.length}</p>
-            {completedTasks !== undefined && !isNaN(completedTasks) && (
-                <p>Completed: {completedTasks}%</p>
-            )}
+        <div >
+            <div className='top-cover'></div>
+            <div className='top-container'>
+                <div className='top-menu'>
+                    <div className='top-general-data'>
+                       <h1 className='app-title'>Task organizer</h1> 
+                        <div className='app-statistics'>
+                            <p className="cardPriority">Number of tasks: <span className="cardPriorityNumber cardPriorityNumber__blue">{tasks.length}</span></p>
+                            {completedTasks !== undefined && !isNaN(completedTasks) && (
+                                <p className="cardPriority">Completed: <span className="cardPriorityNumber cardPriorityNumber__blue">{completedTasks}%</span></p>
+                            )}                              
+                        </div>                         
+                    </div>
+                    <div className='top-filters'>
+                        <FilterByStatus getStatus={setFilteredByStatus} />                              
+                        <FilterByPriority tasks={tasks} getPriority={setFilter} />
+                    </div>
+                    <FilterByTitle getTitle={setFilteredByTitle} /> 
+                </div>
+                <div className='add-btn'> 
+                    <p>Add task</p>
+                    <button
+                        type="button"
+                        className='cardBtnIcon'
+                        aria-label="add task"
+                        onClick={() => setIsModalOpen(true)}
+                    >
+                        <svg width="35" height="35">
+                            <use href={sprite + '#icon-add'} />
+                        </svg>
+                    </button>                        
+                </div>
+            </div>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {filter?.length > 0 &&
                     filter.map(({ title, description, priority, completed, _id }) => (

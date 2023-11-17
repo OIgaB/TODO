@@ -28,14 +28,20 @@
         <path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.4923" d="M4.817 15.39l-0.17-0.162-0.17 0.16-2.373 2.25 0.187 0.18 8.775 8.369 0.17-0.162 18.658-17.799-0.187-0.177-2.341-2.233-0.17 0.162-16.13 15.375-6.25-5.962z"></path>
     </symbol>
 
-    <symbol fill="#000000" id="icon-ascending" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <symbol id="icon-ascending" fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path id="secondary" fill="#1768c5" d="M10.71,7.29l-4-4a1,1,0,0,0-1.42,0l-4,4A1,1,0,0,0,2.71,8.71L5,6.41V19a1,1,0,0,0,2,0V6.41l2.29,2.3a1,1,0,0,0,1.42,0A1,1,0,0,0,10.71,7.29Z"></path>
         <path id="primary" d="M20,18H10a1,1,0,0,1,0-2H20a1,1,0,0,1,0,2Zm0-5H13a1,1,0,0,1,0-2h7a1,1,0,0,1,0,2Zm0-5H15a1,1,0,0,1,0-2h5a1,1,0,0,1,0,2Z"></path>
     </symbol>
     
-    <symbol fill="#000000" id="icon-descending" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <symbol id="icon-descending" fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path id="secondary" fill="#1768c5" d="M10.71,14.29a1,1,0,0,0-1.42,0L7,16.59V4A1,1,0,0,0,5,4V16.59l-2.29-2.3a1,1,0,0,0-1.42,1.42l4,4a1,1,0,0,0,1.42,0l4-4A1,1,0,0,0,10.71,14.29Z"></path>
         <path id="primary" d="M20,17H15a1,1,0,0,1,0-2h5a1,1,0,0,1,0,2Zm0-5H13a1,1,0,0,1,0-2h7a1,1,0,0,1,0,2Zm0-5H10a1,1,0,0,1,0-2H20a1,1,0,0,1,0,2Z"></path>
+    </symbol>
+
+    <symbol id="icon-add" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+        <path d="M512 1024C229.7 1024 0 794.3 0 512S229.7 0 512 0s512 229.7 512 512-229.7 512-512 512z m0-938.7C276.7 85.3 85.3 276.7 85.3 512S276.7 938.7 512 938.7 938.7 747.3 938.7 512 747.3 85.3 512 85.3z" fill="#3688FF"></path>
+        <path d="M682.7 554.7H341.3c-23.6 0-42.7-19.1-42.7-42.7s19.1-42.7 42.7-42.7h341.3c23.6 0 42.7 19.1 42.7 42.7s-19.1 42.7-42.6 42.7z" fill="#5F6379"></path>
+        <path d="M512 725.3c-23.6 0-42.7-19.1-42.7-42.7V341.3c0-23.6 19.1-42.7 42.7-42.7s42.7 19.1 42.7 42.7v341.3c0 23.6-19.1 42.7-42.7 42.7z" fill="#5F6379"></path>
     </symbol>
 
 </defs>
