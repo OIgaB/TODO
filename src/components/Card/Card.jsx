@@ -72,7 +72,7 @@ export const Card = ({ title, description, priority, completed, _id, tasks, getT
                             }}
                             className="checkbox" 
                         />
-                        <svg aria-label="mark" className="checkbox-icon" width="16px" height="15px">
+                        <svg aria-label="mark" className="checkbox-icon card-checkbox-icon" width="16px" height="15px">
                             <use href={sprite + '#icon-checkbox'}></use>
                         </svg>
                     </label>

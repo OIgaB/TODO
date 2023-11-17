@@ -275,6 +275,7 @@ button {
 /* ----------- Form ------------ */
 
 .formContainer {
+  position: relative;
   width: 350px;
   min-height: 350px;
   padding: 24px;
@@ -341,6 +342,18 @@ datalist {
 
 option {
   padding: 0;
+}
+
+.form-status-label {
+  margin-top: 15px;
+  font-family: Poppins-Medium, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: normal;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .form-submitBtn {
@@ -509,9 +522,6 @@ option {
 }
 
 .checkbox-icon {
-  position: absolute;
-  top: -25px;
-  left: -34px;
   width: 25px;
   height: 25px;
   padding: 3px;
@@ -524,6 +534,19 @@ option {
     border: 2px solid #56c90a;
     fill: rgb(107, 100, 100);
   }
+
+  .card-checkbox-icon {
+    position: absolute;
+    top: -25px;
+    left: -34px;
+  }
+
+
+  /* .form-checkbox-icon {
+    position: absolute;
+    top: 185px;
+    left: 54px;
+  } */
 
   .checkbox:checked ~ & {
       background-color: #479911;

@@ -22,6 +22,7 @@ export const TaskForm = ({
     const [selectedPriority, setSelectedPriority] = useState(currentPriority ? currentPriority : 10);
     const [status, setStatus] = useState(currentCompleted);  // to edit
 
+
     const checkTitleClone = (inputTitle, inputDescription, inputPriority) => {  
         const titleClone = tasks.find((task) => ( 
           task.title.toLowerCase() === inputTitle.toLowerCase()
@@ -120,7 +121,7 @@ export const TaskForm = ({
                     </datalist>
                 </div>
                 {currentCompleted !== undefined && (  // to edit
-                    <label className="label-checkbox">
+                    <label className='form-status-label'>
                         Completed:
                         <input 
                             type="checkbox" 
@@ -130,10 +131,10 @@ export const TaskForm = ({
                             onChange={() => setStatus(!status)}
                             className="checkbox" 
                         />
-                        <svg aria-label="mark" className="checkbox-icon" width="16px" height="15px">
+                        <svg aria-label="mark" className="checkbox-icon form-checkbox-icon" width="16px" height="15px">
                             <use href={sprite + '#icon-checkbox'}></use>
                         </svg>
-                    </label>
+                    </label>                        
                 )} 
                 <button type="submit" aria-label={`${modalBtnTitle} task`} className="form-submitBtn">
                     <div className="form-iconWrapper">
@@ -141,7 +142,7 @@ export const TaskForm = ({
                             {modalBtnTitle === 'Create' ? 
                                 <use href={sprite + '#icon-plus'} />  
                             :
-                                <use href={sprite + '#icon-pencil'} />                                    
+                                <use href={sprite + '#icon-pencil'} style={{ stroke: 'rgb(50, 96, 248)' }} />                                    
                             }
                         </svg>                         
                     </div>
