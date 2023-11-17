@@ -31,7 +31,7 @@ Percentage of Completed Tasks: Monitor your success by viewing the percentage of
 ![Alt text](https://res.cloudinary.com/dp9pimwin/image/upload/v1700249111/Edit_task_apts8p.png)
 
 ## Technologies Used
-- [React](https://react.dev/)(version: 20.9.0)
+- [React](https://react.dev/) (version: 18.2.0)
 
 ## Deployment
-The project has been deployed on [Versel](https://vercel.com/).
+The project has been deployed on [Versel] (https://vercel.com/).
