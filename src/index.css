@@ -130,6 +130,11 @@ button {
   margin: auto;
   stroke: black;
 }
+/* ---------------Main-container----------- */
+.main-container {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* ---------------- Filters --------------- */
 
@@ -152,9 +157,9 @@ button {
 
 .top-menu {
   border-radius: 22px;
-  margin: 12px 250px;
+  margin: 12px auto;
   padding: 20px;
-  min-width: 260px;
+  max-width: 500px;
   background: #22272c;
   box-shadow: 0px 0px 6px 4px #0f0f0f;
 }
@@ -187,7 +192,6 @@ button {
 
 .top-filters {
   display: flex;
-  /* background-color: #5b6; */
   justify-content: space-between;
   align-items: center;
 }
@@ -244,11 +248,28 @@ button {
   box-sizing: border-box;
   outline: transparent;
 }
+@media screen and (max-width: 578px) {
+  .menu-search-input {
+    width: 75%;
+  }
+}
+
+.search-add {
+  position: relative;
+}
 
 .add-btn{
   position: absolute;
-  right: 230px;
+  right: -30px;
+  bottom: -100px;
   color:rgb(174, 179, 228);
+}
+
+@media screen and (max-width: 578px) {
+  .add-btn{
+    right: 0px;
+    bottom: -20px;
+  }
 }
 
 /* ----------- Form ------------ */
@@ -429,4 +450,11 @@ option {
         fill: rgb(184, 216, 247);
       }
   }
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column; 
+  gap: 10px;
+  padding-top: 190px;
 }

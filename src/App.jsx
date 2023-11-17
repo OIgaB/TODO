@@ -92,7 +92,7 @@ function App() {
     }, [tasks, filteredByStatus]);   
 
     return (
-        <div >
+        <div className='main-container'>
             <div className='top-cover'></div>
             <div className='top-container'>
                 <div className='top-menu'>
@@ -109,23 +109,25 @@ function App() {
                         <FilterByStatus getStatus={setFilteredByStatus} />                              
                         <FilterByPriority tasks={tasks} getPriority={setFilter} />
                     </div>
-                    <FilterByTitle getTitle={setFilteredByTitle} /> 
-                </div>
-                <div className='add-btn'> 
-                    <p>Add task</p>
-                    <button
-                        type="button"
-                        className='cardBtnIcon'
-                        aria-label="add task"
-                        onClick={() => setIsModalOpen(true)}
-                    >
-                        <svg width="35" height="35">
-                            <use href={sprite + '#icon-add'} />
-                        </svg>
-                    </button>                        
+                    <div className='search-add'>
+                        <FilterByTitle getTitle={setFilteredByTitle} /> 
+                        <div className='add-btn'> 
+                        <p>Add task</p>
+                        <button
+                            type="button"
+                            className='cardBtnIcon'
+                            aria-label="add task"
+                            onClick={() => setIsModalOpen(true)}
+                        >
+                            <svg width="35" height="35">
+                                <use href={sprite + '#icon-add'} />
+                            </svg>
+                        </button>                        
+                        </div>
+                    </div>
                 </div>
             </div>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <ul className='task-list'>
                 {filter?.length > 0 &&
                     filter.map(({ title, description, priority, completed, _id }) => (
                         <li key={_id}>
