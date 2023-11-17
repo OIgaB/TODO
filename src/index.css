@@ -541,13 +541,6 @@ option {
     left: -34px;
   }
 
-
-  /* .form-checkbox-icon {
-    position: absolute;
-    top: 185px;
-    left: 54px;
-  } */
-
   .checkbox:checked ~ & {
       background-color: #479911;
       fill: #fff;
