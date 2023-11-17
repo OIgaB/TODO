@@ -69,18 +69,18 @@ function App() {
         setTasks(prevState => prevState.filter(task => task._id !== _id));
     };
    
-    useEffect(() => {
+    useEffect(() => { // statistics
         const completedTasks = tasks.filter(({ completed }) => completed === true); 
         const completedTasksPercentage = Math.round((completedTasks.length * 100) / tasks.length);
         setCompletedTasks(completedTasksPercentage);
     }, [tasks, completedTasks])
 
-    const getFilteredByTitle = useMemo(() => { 
+    useEffect(() => {  // filter by title
         const data = tasks.filter(({ title }) => title.toLowerCase().includes(filteredByTitle.toLowerCase())); 
         setFilter(data);
     }, [tasks, filteredByTitle]);
 
-    const getFilteredByStatus = useMemo(() => { 
+    useEffect(() => {  // filter by status
         if(filteredByStatus !== 'all' && filteredByStatus !== '') {
             const data = tasks.filter(({ completed }) => completed === JSON.parse(filteredByStatus)); 
             setFilter(data);
