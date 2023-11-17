@@ -1,14 +1,12 @@
 import { useState } from 'react';
 import { Modal } from '../Modal/Modal';
 import { TaskForm } from '../TaskForm/TaskForm';
-import { api } from '../../services/tasks-api';
 import sprite from '../../images/sprite.svg';
 
 
-export const Card = ({ title, description, priority, completed, _id, tasks }) => {
+export const Card = ({ title, description, priority, completed, _id, tasks, getTaskToUpdate, getTaskToDelete }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [status, setStatus] = useState(completed); 
-
 
     return (
         <div style={{ border: '1px dashed blue', padding: '10px', width: '500px', backgroundColor: 'yellowgreen' }}>
@@ -39,6 +37,8 @@ export const Card = ({ title, description, priority, completed, _id, tasks }) =>
                             currentPriority={priority}
                             currentCompleted={completed}
                             currentId={_id}
+                            getTaskToUpdate={getTaskToUpdate}
+                            getStatus={setStatus}
                         /> 
                     </Modal>
                 )}
@@ -46,7 +46,7 @@ export const Card = ({ title, description, priority, completed, _id, tasks }) =>
                     type="button"
                     className='cardBtnIcon'
                     aria-label="delete task"
-                    onClick={() => api.deleteTask(_id, title)}
+                    onClick={() => getTaskToDelete(_id, title)}
                 >
                     <svg width="16" height="16">
                         <use href={sprite + '#icon-trash'} />
@@ -57,11 +57,10 @@ export const Card = ({ title, description, priority, completed, _id, tasks }) =>
                         <input 
                             type="checkbox" 
                             name="completed" 
-                            value={status} 
                             checked={status} 
                             onChange={() => {
                                 setStatus(!status)
-                                api.editTaskStatus(_id, { completed: status })                                
+                                getTaskToUpdate(_id, { completed: !status })                              
                             }}
                             className="checkbox" 
                         />

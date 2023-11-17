@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { api } from '../../services/tasks-api';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import sprite from '../../images/sprite.svg';
 
@@ -9,35 +8,34 @@ export const TaskForm = ({
     modalBtnTitle, 
     onClose, 
     tasks, 
+    getTaskToAdd,
+    getTaskToUpdate,
     currentTitle, 
     currentDescription, 
     currentPriority, 
     currentCompleted, 
-    currentId
+    currentId,
+    getStatus
 }) => {
     const [titleValue, setTitleValue] = useState(currentTitle); // to edit
     const [descriptionValue, setDescriptionValue] = useState(currentDescription); // to edit
     const [selectedPriority, setSelectedPriority] = useState(currentPriority ? currentPriority : 10);
-    const [completed, setCompleted] = useState(currentCompleted);  // to edit
+    const [status, setStatus] = useState(currentCompleted);  // to edit
 
     const checkTitleClone = (inputTitle, inputDescription, inputPriority) => {  
         const titleClone = tasks.find((task) => ( 
           task.title.toLowerCase() === inputTitle.toLowerCase()
         ));
-
         if(titleClone) {
           Notify.failure(`"${inputTitle}" is already in tasks`); 
           return;
         } 
-
         const newTask = {
           title: inputTitle,
           description: inputDescription !== '' ? inputDescription : ' ',
           priority: Number(inputPriority),
         };
-        console.log('newTask', newTask);
-    
-        api.addTask(newTask);
+        getTaskToAdd(newTask);
     };
 
     const handleFormSubmit = event => {
@@ -46,21 +44,21 @@ export const TaskForm = ({
         const inputTitle = event.target.elements.title.value.trim();
         const inputDescription = event.target.elements.description.value.trim();
         const inputPriority = event.target.elements.priority.value;
-
-        if(currentId) { // to edit        
+        
+        if(currentId) { // to edit     
             const inputCompleted = event.target.elements.completed.value;
             const editedTask = {
                 title: inputTitle,
                 description: inputDescription === '' ? ' ' : inputDescription,
                 priority: Number(inputPriority),
-                completed: inputCompleted,
+                completed: JSON.parse(inputCompleted),
             };
-            console.log('editedTask', editedTask);
-            api.editTask(currentId, editedTask);
+            getTaskToUpdate(currentId, editedTask);       
+            getStatus(status);     
         } else { // to add
             checkTitleClone(inputTitle, inputDescription, inputPriority); 
         }
-        
+
         event.target.reset();
     
         if (event.currentTarget === event.target) {
@@ -125,9 +123,9 @@ export const TaskForm = ({
                         <input 
                             type="checkbox" 
                             name="completed" 
-                            value={completed} 
-                            checked={completed} 
-                            onChange={() => setCompleted(!completed)}
+                            value={status} 
+                            checked={status} 
+                            onChange={() => setStatus(!status)}
                             className="checkbox" 
                         />
                         <svg aria-label="mark" className="checkbox-icon" width="16px" height="15px">

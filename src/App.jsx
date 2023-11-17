@@ -1,26 +1,81 @@
 import { useState, useMemo, useEffect } from 'react';
-import { FilterByTitle } from '../FilterByTitle/FilterByTitle';
-import { FilterByStatus } from '../FilterByStatus/FilterByStatus';
-import { FilterByPriority } from '../FilterByPriority/FilterByPriority';
-import { Card } from '../Card/Card';
-import { Modal } from '../Modal/Modal';
-import { TaskForm } from '../TaskForm/TaskForm';
+import { FilterByTitle } from './components/FilterByTitle/FilterByTitle';
+import { FilterByStatus } from './components/FilterByStatus/FilterByStatus';
+import { FilterByPriority } from './components/FilterByPriority/FilterByPriority';
+import { Card } from './components/Card/Card';
+import { Modal } from './components/Modal/Modal';
+import { TaskForm } from './components/TaskForm/TaskForm';
+import { api } from './services/tasks-api';
 
 
-export const Dashboard = ({ tasks }) => {
+function App() { 
+    const [tasks, setTasks] = useState([]); 
     const [completedTasks, setCompletedTasks] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [filteredByTitle, setFilteredByTitle] = useState('');
     const [filteredByStatus, setFilteredByStatus] = useState('');
     const [reorderedByPriority, setReorderedByPriority] = useState('');
 
+       
+    useEffect(() => {
+        (async () => { // IIFE
+            try {
+                const data = await api.getAlltasks();  
+                setTasks(data); 
+            } catch(error) {
+                console.error(error.message); 
+            }
+        })();
+    }, []);
+
+    const handleTaskToAdd = async (newTask) => {
+        try {
+            const data = await api.addTask(newTask); 
+            setTasks(prevState => [...prevState, data]);
+        } catch(error) {
+            console.error(error.message); 
+        }
+    };
+
+    const handleTaskToUpdate = async (currentId, editedTask) => {
+        const isSingleKeyObject = Object.keys(editedTask).length === 1 && 'completed' in editedTask;
+         
+        if(isSingleKeyObject) { // for patch
+            api.editTaskStatus(currentId, editedTask);
+            const updatedTasks = tasks.map(task => {
+                if (task._id === currentId) {
+                    return {
+                    ...task, 
+                    completed: editedTask.completed
+                    };
+                }
+                return task;
+            })
+            setTasks(updatedTasks); 
+        } else { // for put
+            try {
+                const data = await api.editTask(currentId, editedTask);
+                const index = tasks.findIndex(task => task._id === currentId);
+                const updatedTasks = [...tasks];
+                updatedTasks.splice(index, 1, data)
+                setTasks(updatedTasks);
+            } catch(error) {
+                console.error(error.message); 
+            }
+        }
+    };
+
+    const handleTaskToDelete = (_id, title) => {
+        api.deleteTask(_id, title);
+        setTasks(prevState => prevState.filter(task => task._id !== _id));
+    };
+   
 
     useEffect(() => {
         const completedTasks = tasks.filter(({ completed }) => completed === true); 
-        const completedTasksPercentage = (completedTasks.length * 100) / tasks.length;
+        const completedTasksPercentage = Math.round((completedTasks.length * 100) / tasks.length);
         setCompletedTasks(completedTasksPercentage);
     }, [tasks, completedTasks])
-
 
     const getFilteredByTitle = useMemo(() => { 
         return tasks.filter(({ title }) => title.toLowerCase().includes(filteredByTitle.toLowerCase())); 
@@ -35,12 +90,13 @@ export const Dashboard = ({ tasks }) => {
         return;
     }, [tasks, filteredByStatus]);   
 
-    console.log('completedTasks', completedTasks);
-
     // const filteredTasks = getFilteredByStatus ? getFilteredByStatus : getFilteredByTitle;
     // console.log('filteredTasks', filteredTasks);
 
+    // console.log('getFilteredByTitle', getFilteredByTitle);
+    // console.log('getFilteredByStatus', getFilteredByStatus);
     // console.log('reorderedByPriority', reorderedByPriority);
+    // console.log('order:', getFilteredByStatus || reorderedByPriority || getFilteredByTitle);
 
     return (
         <div>
@@ -63,6 +119,8 @@ export const Dashboard = ({ tasks }) => {
                                 completed={completed} 
                                 _id={_id} 
                                 tasks={tasks} 
+                                getTaskToDelete={handleTaskToDelete}
+                                getTaskToUpdate={handleTaskToUpdate}
                             />
                         </li>          
                     ))
@@ -75,9 +133,12 @@ export const Dashboard = ({ tasks }) => {
                         modalBtnTitle={'Create'}
                         onClose={() => setIsModalOpen(false)} 
                         tasks={tasks}
+                        getTaskToAdd={handleTaskToAdd}
                     />               
                 </Modal>
             )}
         </div>
     );
 };
+
+export default App;
