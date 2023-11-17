@@ -8,7 +8,7 @@ export const FilterByStatus = ({ getStatus }) => {
         const inputStatus = event.target.elements.status.value; // all / true / false
         getStatus(inputStatus);
 
-        event.target.reset();
+        // event.target.reset();
     };
 
     return (

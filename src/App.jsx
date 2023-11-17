@@ -14,9 +14,8 @@ function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [filteredByTitle, setFilteredByTitle] = useState('');
     const [filteredByStatus, setFilteredByStatus] = useState('');
-    const [reorderedByPriority, setReorderedByPriority] = useState('');
+    const [filter, setFilter] = useState(tasks);
 
-       
     useEffect(() => {
         (async () => { // IIFE
             try {
@@ -70,7 +69,6 @@ function App() {
         setTasks(prevState => prevState.filter(task => task._id !== _id));
     };
    
-
     useEffect(() => {
         const completedTasks = tasks.filter(({ completed }) => completed === true); 
         const completedTasksPercentage = Math.round((completedTasks.length * 100) / tasks.length);
@@ -78,39 +76,33 @@ function App() {
     }, [tasks, completedTasks])
 
     const getFilteredByTitle = useMemo(() => { 
-        return tasks.filter(({ title }) => title.toLowerCase().includes(filteredByTitle.toLowerCase())); 
+        const data = tasks.filter(({ title }) => title.toLowerCase().includes(filteredByTitle.toLowerCase())); 
+        setFilter(data);
     }, [tasks, filteredByTitle]);
 
     const getFilteredByStatus = useMemo(() => { 
         if(filteredByStatus !== 'all' && filteredByStatus !== '') {
-            return tasks.filter(({ completed }) => completed === JSON.parse(filteredByStatus)); 
+            const data = tasks.filter(({ completed }) => completed === JSON.parse(filteredByStatus)); 
+            setFilter(data);
         } else if(filteredByStatus === 'all') {
-            return tasks;
+            setFilter(tasks);
         }
         return;
     }, [tasks, filteredByStatus]);   
-
-    // const filteredTasks = getFilteredByStatus ? getFilteredByStatus : getFilteredByTitle;
-    // console.log('filteredTasks', filteredTasks);
-
-    // console.log('getFilteredByTitle', getFilteredByTitle);
-    // console.log('getFilteredByStatus', getFilteredByStatus);
-    // console.log('reorderedByPriority', reorderedByPriority);
-    // console.log('order:', getFilteredByStatus || reorderedByPriority || getFilteredByTitle);
 
     return (
         <div>
             <button onClick={() => setIsModalOpen(true)}>Add task</button>
             <FilterByTitle getTitle={setFilteredByTitle} />
             <FilterByStatus getStatus={setFilteredByStatus} />
-            <FilterByPriority tasks={tasks} getPriority={setReorderedByPriority} />
+            <FilterByPriority tasks={tasks} getPriority={setFilter} />
             <p>Number of tasks: {tasks.length}</p>
             {completedTasks !== undefined && !isNaN(completedTasks) && (
                 <p>Completed: {completedTasks}%</p>
             )}
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {tasks?.length > 0 &&
-                    tasks.map(({ title, description, priority, completed, _id }) => (
+                {filter?.length > 0 &&
+                    filter.map(({ title, description, priority, completed, _id }) => (
                         <li key={_id}>
                             <Card 
                                 title={title} 
@@ -118,7 +110,7 @@ function App() {
                                 priority={priority} 
                                 completed={completed} 
                                 _id={_id} 
-                                tasks={tasks} 
+                                tasks={filter} 
                                 getTaskToDelete={handleTaskToDelete}
                                 getTaskToUpdate={handleTaskToUpdate}
                             />
@@ -132,7 +124,7 @@ function App() {
                         modalTitle={'Add task'}
                         modalBtnTitle={'Create'}
                         onClose={() => setIsModalOpen(false)} 
-                        tasks={tasks}
+                        tasks={filter}
                         getTaskToAdd={handleTaskToAdd}
                     />               
                 </Modal>
