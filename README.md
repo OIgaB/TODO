@@ -33,5 +33,7 @@ Percentage of Completed Tasks: Monitor your success by viewing the percentage of
 ## Technologies Used
 - [React](https://react.dev/) (version: 18.2.0)
 
+[Backend](https://todo-backend-iota.vercel.app/api/tasks/): https://github.com/OIgaB/TODO-backend 
+
 ## Deployment
 The project has been deployed on [Versel] (https://vercel.com/).
