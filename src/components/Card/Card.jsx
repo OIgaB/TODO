@@ -37,7 +37,6 @@ export const Card = ({ title, description, priority, completed, _id, tasks, getT
                             <TaskForm 
                                 modalTitle={'Edit task'}
                                 modalBtnTitle={'Edit'}
-                                onClose={() => setIsModalOpen(false)} 
                                 tasks={tasks}
                                 currentTitle={title}
                                 currentDescription={description}

@@ -150,7 +150,6 @@ function App() {
                     <TaskForm 
                         modalTitle={'Add task'}
                         modalBtnTitle={'Create'}
-                        onClose={() => setIsModalOpen(false)} 
                         tasks={filter}
                         getTaskToAdd={handleTaskToAdd}
                     />               

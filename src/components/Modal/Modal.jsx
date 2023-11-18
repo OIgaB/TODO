@@ -25,6 +25,7 @@ export const Modal = ({ isOpen, onClose, children }) => {
          onClose();
          document.body.style.overflow = 'visible'; 
       };
+      document.body.style.overflow = 'visible'; // for btn-close
    };
 
    document.body.style.overflow = 'hidden'; 

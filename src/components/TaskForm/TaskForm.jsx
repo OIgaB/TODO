@@ -6,7 +6,6 @@ import sprite from '../../images/sprite.svg';
 export const TaskForm = ({ 
     modalTitle, 
     modalBtnTitle, 
-    onClose, 
     tasks, 
     getTaskToAdd,
     getTaskToUpdate,
@@ -59,13 +58,7 @@ export const TaskForm = ({
         } else { // to add
             checkTitleClone(inputTitle, inputDescription, inputPriority); 
         }
-
         event.target.reset();
-    
-        if (event.currentTarget === event.target) {
-          onClose();
-          document.body.style.overflow = 'visible'; 
-        }
     };
 
     return (
